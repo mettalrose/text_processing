@@ -193,7 +193,7 @@ if args.master_student and args.instructor_codes:
         master_student_file = pandas.ExcelFile(args.master_student)
         master_student_data = pandas.read_excel(master_student_file)
     elif '.csv' in args.master_student:
-        master_student_data = pandas.read_csv(args.master_student, index=False)
+        master_student_data = pandas.read_csv(args.master_student)
 
     # get last (highest) section code from master student file
     last_section_code = master_student_data['Class Section'].max()
