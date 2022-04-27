@@ -33,7 +33,7 @@ args = parser.parse_args()
 
 
 def combine_tabs(filename):
-    if '.xlsx' in filename or '.xls' in filename:
+    if ('.xlsx' in filename or '.xls' in filename) and (not filename.startswith('~')):
         print("Opening file " + filename)
         data = pandas.ExcelFile(filename)
         tabs = data.sheet_names
@@ -72,7 +72,13 @@ def combine_tabs(filename):
                 # comment: add this tab to frames list to combine data
                 frames.append(this_tab)
             else:
-                print("There's a mismatch between instructor tab and master tab")
+                print("There's a mismatch between instructor tab and master tab. You can check the mismatch below. Exiting because of this issue")
+                print("List of students in this instructor tab:")
+                print(studentid)
+                print("List of students in registrar tab:")
+                print(filterid["Registrar ID"].tolist())
+
+                exit()
 
         # comment: combine all data
         if len(frames) != 0:
